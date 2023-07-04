@@ -9,3 +9,5 @@ git commit    提交
 在英文状态下输入 ":wq"
 
 vim说明的简化版本 commit -m"说明文字"
+
+上传到GitHub
