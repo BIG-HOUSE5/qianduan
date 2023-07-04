@@ -8,3 +8,4 @@ git commit    提交
 编辑完成后按 esc 退出
 在英文状态下输入 ":wq"
 
+vim说明的简化版本 commit -m"说明文字"
