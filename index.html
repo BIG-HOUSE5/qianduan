@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            background-color: #eee;
+        }
+              
+        .flex{
+            display: flex;           
+        }
+        .flex1{
+            flex:1;
+        }
+        .column{
+            
+            flex-direction: column;
+        }
+        .list-items{
+            height: 150px;
+            margin:5px;
+
+        }
+        .data-block{
+            margin: 8px;
+            height:100px;
+        }
+        .shadow{
+            box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+          rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+        }
+        .white{
+            background-color: #fff;
+        }
+        .daohang{
+            padding: 10px 20px;
+            border-bottom: 1px solid rgb(201,201,201);
+            font-size: 20px;
+            color:#666;
+        }
+        @media(max-width:600px){
+            .cebian{
+                display: none;
+            }
+            .neirong{
+                flex-direction: column;
+            }
+            .shujuqu{
+                flex-direction: column;
+            }
+            .youju{
+                margin-left: 8px;
+            }
+            .shuju{
+                margin:0 0 8px;
+                flex:auto;
+            }
+
+        }
+        
+    </style>
+</head>
+<body class="flex">
+    <!-- 侧边栏 -->
+    <div style="width: 300px;z-index: 3;"
+     class="cebian shadow white">
+        <!--picture  -->
+            <div
+            style="
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+                border-bottom: 1px solid #999;
+                height: 100px;
+            "
+            class="flex"
+            >
+                <img src="" alt="pic" width="40px">
+                <div style="margin-left: 10px;">用户</div>
+            </div>
+        <!-- 导航 -->
+            <div class="flex1">
+                <div class="daohang">导航</div>
+                <div class="daohang">导航</div>
+                <div class="daohang">导航</div>
+                <div class="daohang">导航</div>
+                <div class="daohang">导航</div>
+
+            </div>
+    </div>
+    <!-- 主区域 -->
+    <div  
+    class="flex flex1 column">
+        <!-- 头部区域 -->
+        <div style="height: 100px;" class="shadow white">
+        </div>
+        <!-- 内容区域 -->
+        <div style="margin: 5px; overflow: auto;" class="flex flex1 neirong">
+            <!-- left -->
+            <div style="flex:3;" class="flex column ">
+                <!-- data -->
+                <div style="height: 120px; " class="shujuqu flex">
+                    <div class="shuju data-block flex1 shadow white"></div>
+                    <div class="shuju data-block flex1 shadow white"></div>
+                    <div class="shuju data-block flex1 shadow white"></div>
+                    <div class="shuju data-block flex1 shadow white"></div>
+
+                </div>
+                <!-- list -->
+                <div >
+                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white"></div>
+                   
+
+                </div>
+            </div>
+            <!-- right -->
+            <div class="flex  flex1 column youqu">
+                <!-- inform -->
+                    <div style="height: 180px;margin: 5px;" class="shadow white">
+
+                    </div>
+                <!-- message -->
+                    <div style="height: 180px; margin:5px" class="shadow white">
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
