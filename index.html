@@ -63,7 +63,28 @@
 
         }
         
+        
     </style>
+    <script>
+        onload=function (){
+            let t=Date();
+            let b=parseInt(t[16])*10+parseInt(t[17]) 
+            document.getElementById("welcome").innerHTML=b
+            if(b<=5){
+                 document.getElementById("welcome").innerHTML="不睡觉，搁着修仙呢"
+            }else if(b<=12){
+                document.getElementById("welcome").innerHTML="一日之计在于晨"
+            }
+            else if(b>12&&b<=18){
+                document.getElementById("welcome").innerHTML="下午好，把握当下"
+            }else if(b>18&&b<=22){
+                document.getElementById("welcome").innerHTML="晚上好"
+            }else if(b>22){
+                 document.getElementById("welcome").innerHTML="时间晚了，早点休息"
+            }
+        }
+        
+    </script>
 </head>
 <body class="flex">
     <!-- 侧边栏 -->
@@ -80,16 +101,16 @@
             "
             class="flex"
             >
-                <img src="" alt="pic" width="40px">
-                <div style="margin-left: 10px;">用户</div>
+                <img src="头像.jpg" alt="pic" width="40px">
+                <div style="margin-left: 10px;">马华岩</div>
             </div>
         <!-- 导航 -->
             <div class="flex1">
-                <div class="daohang">导航</div>
-                <div class="daohang">导航</div>
-                <div class="daohang">导航</div>
-                <div class="daohang">导航</div>
-                <div class="daohang">导航</div>
+                <div class="daohang"><a href="http://www.bilibili.com" target="_blank">哔哩哔哩</a></div>
+                <div class="daohang"><a href="http://www.baidu.com" target="_blank">百度</a></div>
+                <div class="daohang"><a href="https://cn.bing.com/translator" target="_blank">翻译</a></div>
+                <div class="daohang"><a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
+                <div class="daohang"><a href="" target="_blank">待添加</a></div>
 
             </div>
     </div>
@@ -97,7 +118,12 @@
     <div  
     class="flex flex1 column">
         <!-- 头部区域 -->
-        <div style="height: 100px;" class="shadow white">
+        <div style="height: 100px;text-align: center;" class="shadow white">
+            <p id="welcome" style="font-family: 宋体;
+                font-size: 30px;
+               color: #0e1d09;
+            "></p>
+            <p></p>
         </div>
         <!-- 内容区域 -->
         <div style="margin: 5px; overflow: auto;" class="flex flex1 neirong">
@@ -113,7 +139,10 @@
                 </div>
                 <!-- list -->
                 <div >
-                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white">                      
+                        <input placeholder="最重要的事？" id="shuRuKuang" />
+                        <span id="anNiu" onclick="change()">✔</span>
+                    </div>
                     <div class="list-items shadow white"></div>
                     <div class="list-items shadow white"></div>
                     <div class="list-items shadow white"></div>
@@ -137,4 +166,32 @@
         </div>
     </div>
 </body>
+    <script>
+        let youShi = false;
+
+        function change() {
+            let anNiu = document.getElementById("anNiu");
+            let shuRuKuang = document.getElementById("shuRuKuang");
+            if (youShi) {
+            youShi = false;
+            anNiu.innerText = "✔";
+            shuRuKuang.style.borderBottomColor = "#fff";
+            shuRuKuang.value = "";
+            shuRuKuang.readOnly = false;
+            window.localStorage.removeItem("shi");
+            } else {
+            youShi = true;
+            anNiu.innerText = "✘";
+            shuRuKuang.style.borderBottomColor = "transparent";
+            shuRuKuang.readOnly = true;
+            window.localStorage.setItem("shi", shuRuKuang.value);
+            }
+        }
+        let data = window.localStorage.getItem("shi");
+        console.log(data)
+        if (data) {
+            document.getElementById("shuRuKuang").value = data;
+            change();
+        }
+    </script>
 </html>

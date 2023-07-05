@@ -15,7 +15,18 @@
         align-items: center;
         flex-direction: column;
       }
+
     </style>
+    <script>
+      function dianzan(){
+        let dainzanshubiaoqian=window.document.getElementById('dz');
+        let dianzanshu=parseInt(dainzanshubiaoqian.innerText);
+        let xindianzanshu=dianzanshu+1;
+        dainzanshubiaoqian.innerText=xindianzanshu;
+        return;
+      }
+      
+    </script>
   </head>
   <body style="background-image: url(bz.jpg); background-size: cover">
     <div class="buju">
@@ -30,8 +41,11 @@
           <input type="password" placeholder="请输入密码" />
           <br />
           <input type="button" value="登录" />
-          <input type="button" value="注册" />
+          <input type="button" value="注册" />  
+
         </form>
+        <button id="dz" onclick="dianzan()">0</button>
+        <a href="https://www.midorg.com/bg.jpg">壁纸链接</a>
       </div>
     </div>
   </body>
