@@ -8,9 +8,8 @@
         body{
             margin: 0;
             height: 100vh;
-            background-color: #eee;
+            background-image: url("bz.jpg");
         }
-              
         .flex{
             display: flex;           
         }
@@ -35,7 +34,8 @@
           rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
         }
         .white{
-            background-color: #fff;
+            background-color: #f8f4ed33;           
+            backdrop-filter: (10px);
         }
         .daohang{
             padding: 10px 20px;
@@ -62,13 +62,15 @@
             }
 
         }
-        
+        A:link{color:rgb(164, 224, 224)}
+        A:visited{color:aliceblue}
+        A:hover{color: bisque;}
         
     </style>
     <script>
         onload=function (){
-            let t=Date();
-            let b=parseInt(t[16])*10+parseInt(t[17]) 
+            let t=new Date();
+            let b=t.getHours()
             document.getElementById("welcome").innerHTML=b
             if(b<=5){
                  document.getElementById("welcome").innerHTML="不睡觉，搁着修仙呢"
@@ -77,9 +79,9 @@
             }
             else if(b>12&&b<=18){
                 document.getElementById("welcome").innerHTML="下午好，把握当下"
-            }else if(b>18&&b<=22){
+            }else if(b>18&&b<22){
                 document.getElementById("welcome").innerHTML="晚上好"
-            }else if(b>22){
+            }else if(b>=22){
                  document.getElementById("welcome").innerHTML="时间晚了，早点休息"
             }
         }
@@ -102,7 +104,7 @@
             class="flex"
             >
                 <img src="头像.jpg" alt="pic" width="40px">
-                <div style="margin-left: 10px;">马华岩</div>
+                <div style="margin-left: 10px;">Big-House</div>
             </div>
         <!-- 导航 -->
             <div class="flex1">
@@ -110,7 +112,7 @@
                 <div class="daohang"><a href="http://www.baidu.com" target="_blank">百度</a></div>
                 <div class="daohang"><a href="https://cn.bing.com/translator" target="_blank">翻译</a></div>
                 <div class="daohang"><a href="https://www.runoob.com" target="_blank">菜鸟教程</a></div>
-                <div class="daohang"><a href="" target="_blank">待添加</a></div>
+                <div class="daohang"><a href="#bot" >到达底部</a></div>
 
             </div>
     </div>
@@ -147,7 +149,7 @@
                     <div class="list-items shadow white"></div>
                     <div class="list-items shadow white"></div>
                     <div class="list-items shadow white"></div>
-                    <div class="list-items shadow white"></div>
+                    <div class="list-items shadow white" id="bot"></div>
                    
 
                 </div>
@@ -188,7 +190,6 @@
             }
         }
         let data = window.localStorage.getItem("shi");
-        console.log(data)
         if (data) {
             document.getElementById("shuRuKuang").value = data;
             change();

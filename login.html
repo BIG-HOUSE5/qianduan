@@ -18,12 +18,18 @@
 
     </style>
     <script>
-      function dianzan(){
-        let dainzanshubiaoqian=window.document.getElementById('dz');
-        let dianzanshu=parseInt(dainzanshubiaoqian.innerText);
-        let xindianzanshu=dianzanshu+1;
-        dainzanshubiaoqian.innerText=xindianzanshu;
-        return;
+      function zc(){
+        alert("┏┛墓┗┓...(((m -__-)m")
+      }
+      function login(){
+        let zhanghao=document.getElementById("zhanghao").value
+        let mima=document.getElementById("mima").value
+        if(zhanghao=="111"&&mima=="aaa")
+        {
+          window.location.href="index.html";
+        }else{
+          alert("账密输入错误")
+        }
       }
       
     </script>
@@ -34,18 +40,16 @@
         <p style="color: white; font-size: 50px; font-family: 宋体">欢迎登录</p>
       </div>
       <div style="display: flex; align-items: center">
-        <img src=" " alt="pic" style="height: 50px" />
+        <img src="头像.jpg" alt="图片" style="height: 50px ;margin-right: 10px;" />
         <form>
-          <input type="text" placeholder="输入账号" />
+          <input type="text" id="zhanghao" placeholder="输入账号" />
           <br />
-          <input type="password" placeholder="请输入密码" />
+          <input type="password" id="mima" placeholder="请输入密码" />
           <br />
-          <input type="button" value="登录" />
-          <input type="button" value="注册" />  
+          <input type="submit" value="登录" id="denglu" onclick="login()"/>
+          <input type="button" value="注册" id="zhuce" onclick="zc()"/>  
 
         </form>
-        <button id="dz" onclick="dianzan()">0</button>
-        <a href="https://www.midorg.com/bg.jpg">壁纸链接</a>
       </div>
     </div>
   </body>

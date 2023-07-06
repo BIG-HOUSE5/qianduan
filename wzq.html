@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋</title>
+    <style>
+        body{
+            margin:0px;
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+            background-color: antiquewhite;
+        }
+        #info{
+            margin-top: 100px;
+            height: 50px;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+        }
+        #root{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 500px;
+            max-width: 90%;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+            rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+            overflow: hidden;
+        }
+        .square{
+            position: relative;
+            flex-grow: 1;
+            margin: 0;
+            /* border: 1px solid #000; */
+            box-shadow: 1px 1px 1px  rgba(0,0,0,0.4) inset;
+        }
+        .circle{
+            position: absolute;
+            top:0;
+            left:0;
+            transform: translate(-50%,-50%);
+            border-radius: 50%;
+        }
+        .white{
+            background: #fff;
+            border:1px,solid,#ccc;
+
+        }
+        .black{
+            background: #000;
+            border :1px,solid,#000;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <div id="info">白棋先行</div>
+    <div id="root"></div>
+
+    <script>
+        let root=document.getElementById("root")
+        let cell=15
+        let html=""
+        let board=[]
+
+        let rwidth=root.clientWidth
+        let swidth=parseInt(rwidth/cell,10)+"px"
+        let cwidth=parseInt(rwidth/cell/1.2,10)+"px"
+        // 画出一个棋盘，因为circle有-50%的偏移，所以会落到对角线上。
+        for(let i =0;i<15;i++){
+            for(let j=0;j<15;j++){
+                 let box=`<div class="square" style="width:${swidth};height:${swidth}">
+                    <div class="circle" column="${j}" row="${i}" style="width:${cwidth};height:${cwidth}">
+                    </div></div>`;
+                html=html+box;
+            }
+        }
+    //  let arr = Array.from({ length: cell });
+
+    //   // 循环该数组，创建出棋盘html，横向15个，竖向15个
+    //   arr.map((_, row) => {
+    //     //行
+    //     arr.map((_, column) => {
+    //       //列
+    //       // 棋盘格子，一个方块，里面是一个圆形，此时圆形还看不到
+    //       let box = `<div class="square" style="width:${swidth};height:${swidth}">
+    //             <div class="circle" column="${column}" row="${row}" style="width:${cwidth};height:${cwidth}"></div>
+    //         </div>`;
+    //       html = html + box;
+    //     });
+    //   });
+
+        root.innerHTML=html;
+        let chessColor="black"
+        //给棋盘添加监听事件
+        root.addEventListener("click",(e)=>{
+            //e是浏览器传入的参数，包含点击位置等等
+           // console.log(e)
+            let target=e.target
+            //console.log(target)
+            if(target.className.includes("circle")&&target.classList.length==1){
+                if(chessColor==="white"){
+                    chessColor="black";
+                    document.getElementById("info").innerHTML="白子回合"
+                }else{
+                    chessColor="white";
+                    document.getElementById("info").innerHTML="黑子回合"
+                }
+            
+                target.classList.add(chessColor)
+                let column=parseInt(target.getAttribute("column"))
+                let row=parseInt(target.getAttribute("row"))
+                console.log(column,row,chessColor)
+                board.push({
+                    column:column,
+                    row:row,
+                    chessColor:chessColor,
+                })
+                //判断是否获胜，延迟1ms是为了等待浏览器把棋子渲染到界面
+                setTimeout(()=>{
+                    checkWin(column,row,chessColor)
+                },1)
+            }else{
+                console.log("此处已有棋子")
+            }
+        })
+        function checkWin(column,row,chessColor){
+            let axis=[
+                [0,1],
+                [1,0],
+                [1,1],
+                [1,-1]
+            ]
+            axis.map((direct)=>{
+                let reverse=[-direct[0],-direct[1]]
+
+                let positiveDirectionNumber=0
+                let negativeDirectionNumber=0
+                for(let index=1;index<6;index++){
+                    let pcolumn=column+direct[0]*index
+                    let prow=row+direct[1]*index
+                    let phave=board.some((item)=>
+                        pcolumn===item.column&&prow===item.row&&
+                        chessColor===item.chessColor
+                    )
+                    if(phave){
+                        positiveDirectionNumber++
+                    }else{
+                        break
+                    }
+                }
+                for(let index=1;index<6;index++){
+                    let ncolumn=column+reverse[0]*index
+                    let nrow=row+reverse[1]*index
+                    let nhave=board.some((item)=>
+                        ncolumn===item.column&&nrow===item.row&&
+                        chessColor===item.chessColor
+                    )
+                    if(nhave){
+                        negativeDirectionNumber++
+                    }else{
+                        break
+                    }
+                }
+                if(positiveDirectionNumber+negativeDirectionNumber>=4){
+                    window.confirm(
+                        (chessColor==="white"?"白棋":"黑棋"+"胜利！")
+                    )
+                    window.location.reload()
+                }
+            })
+                
+            
+        }
+    </script>
+</body>
+</html>
